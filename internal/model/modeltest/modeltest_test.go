@@ -57,3 +57,75 @@ func TestEquateRats(t *testing.T) {
 		})
 	}
 }
+
+func TestEquateApprox(t *testing.T) {
+	t.Parallel()
+
+	testCases := []struct {
+		name   string
+		digits int
+		lhs    *big.Rat
+		rhs    *big.Rat
+		want   bool
+	}{
+		{
+			name:   "identical",
+			digits: 3,
+			lhs:    big.NewRat(1, 3),
+			rhs:    big.NewRat(1, 3),
+			want:   true,
+		}, {
+			name:   "within digits",
+			digits: 3,
+			lhs:    big.NewRat(1, 3),
+			rhs:    big.NewRat(3333, 10000),
+			want:   true,
+		}, {
+			name:   "beyond digits",
+			digits: 6,
+			lhs:    big.NewRat(1, 3),
+			rhs:    big.NewRat(3333, 10000),
+			want:   false,
+		}, {
+			name:   "larger right operand",
+			digits: 3,
+			lhs:    big.NewRat(9999, 10000),
+			rhs:    big.NewRat(1, 1),
+			want:   true,
+		}, {
+			name:   "both zero",
+			digits: 3,
+			lhs:    new(big.Rat),
+			rhs:    new(big.Rat),
+			want:   true,
+		}, {
+			name:   "both nil",
+			digits: 3,
+			lhs:    nil,
+			rhs:    nil,
+			want:   true,
+		}, {
+			name:   "one nil",
+			digits: 3,
+			lhs:    big.NewRat(1, 1),
+			rhs:    nil,
+			want:   false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
+			// Arrange
+			opt := modeltest.EquateApprox(tc.digits)
+
+			// Act
+			equal := cmp.Equal(tc.lhs, tc.rhs, opt)
+
+			// Assert
+			if got, want := equal, tc.want; !cmp.Equal(got, want) {
+				t.Errorf("cmp.Equal(%v, %v, EquateApprox(%d)) = %v, want %v", tc.lhs, tc.rhs, tc.digits, got, want)
+			}
+		})
+	}
+}
