@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
+	"github.com/friendly-fhir/go-ucum/internal/model"
 	"github.com/friendly-fhir/go-ucum/internal/model/modeltest"
 )
 
@@ -125,6 +126,60 @@ func TestEquateApprox(t *testing.T) {
 			// Assert
 			if got, want := equal, tc.want; !cmp.Equal(got, want) {
 				t.Errorf("cmp.Equal(%v, %v, EquateApprox(%d)) = %v, want %v", tc.lhs, tc.rhs, tc.digits, got, want)
+			}
+		})
+	}
+}
+
+func TestEquateCanonicals(t *testing.T) {
+	t.Parallel()
+
+	testCases := []struct {
+		name string
+		lhs  model.Canonical
+		rhs  model.Canonical
+		want bool
+	}{
+		{
+			name: "equal factors in different terms",
+			lhs:  model.Canonical{Factor: big.NewRat(2, 4)},
+			rhs:  model.Canonical{Factor: big.NewRat(1, 2)},
+			want: true,
+		}, {
+			name: "absent and empty arbitrary units",
+			lhs:  model.Canonical{Factor: big.NewRat(1, 1), Arbitrary: map[string]int{}},
+			rhs:  model.Canonical{Factor: big.NewRat(1, 1)},
+			want: true,
+		}, {
+			name: "different arbitrary units",
+			lhs:  model.Canonical{Factor: big.NewRat(1, 1), Arbitrary: map[string]int{"[iU]": 1}},
+			rhs:  model.Canonical{Factor: big.NewRat(1, 1)},
+			want: false,
+		}, {
+			name: "special units with the same function name",
+			lhs:  model.Canonical{Special: &model.Special{Name: "Cel", Scale: big.NewRat(1, 1)}},
+			rhs:  model.Canonical{Special: &model.Special{Name: "Cel", Scale: big.NewRat(1, 1)}},
+			want: true,
+		}, {
+			name: "special units with different function names",
+			lhs:  model.Canonical{Special: &model.Special{Name: "Cel"}},
+			rhs:  model.Canonical{Special: &model.Special{Name: "degF"}},
+			want: false,
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
+			// Arrange
+			opt := modeltest.EquateCanonicals()
+
+			// Act
+			equal := cmp.Equal(tc.lhs, tc.rhs, opt)
+
+			// Assert
+			if got, want := equal, tc.want; !cmp.Equal(got, want) {
+				t.Errorf("cmp.Equal(%v, %v, EquateCanonicals()) = %v, want %v", tc.lhs, tc.rhs, got, want)
 			}
 		})
 	}

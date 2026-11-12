@@ -4,6 +4,9 @@ import (
 	"math/big"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+
+	"github.com/friendly-fhir/go-ucum/internal/model"
 )
 
 // EquateRats returns a [cmp.Option] that treats two [big.Rat] values as equal
@@ -33,4 +36,15 @@ func EquateApprox(digits int) cmp.Option {
 		}
 		return difference.Cmp(scale.Mul(scale, tolerance)) <= 0
 	})
+}
+
+// EquateCanonicals returns a [cmp.Option] that compares [model.Canonical]
+// values by meaning: magnitudes by value, an absent and an empty set of
+// arbitrary units alike, and special units by the name of their conversion.
+func EquateCanonicals() cmp.Option {
+	return cmp.Options{
+		EquateRats(),
+		cmpopts.EquateEmpty(),
+		cmpopts.IgnoreFields(model.Special{}, "Conversion"),
+	}
 }
