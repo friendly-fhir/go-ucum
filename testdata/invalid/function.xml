@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ascii"?>
+<root xmlns="http://unitsofmeasure.org/ucum-essence" version="2.2">
+   <base-unit Code="rad" CODE="RAD" dim="A"/>
+   <unit Code="[cos]" CODE="[COS]" isSpecial="yes"><value><function name="cosTimes100" value="1" Unit="rad"/></value></unit>
+</root>

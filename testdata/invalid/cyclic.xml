@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ascii"?>
+<root xmlns="http://unitsofmeasure.org/ucum-essence" version="2.2">
+   <base-unit Code="m" CODE="M" dim="L"/>
+   <unit Code="[a]" CODE="[A]"><value Unit="[b]" value="1">1</value></unit>
+   <unit Code="[b]" CODE="[B]"><value Unit="[a]" value="1">1</value></unit>
+</root>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ascii"?>
+<root xmlns="http://unitsofmeasure.org/ucum-essence" version="2.2" revision="N/A"
+      revision-date="2024-06-17">
+   <prefix Code="k" CODE="K"><name>kilo</name><printSymbol>k</printSymbol><value value="1e3">1 &#215; 10<sup>3</sup></value></prefix>
+   <prefix Code="d" CODE="D"><name>deci</name><printSymbol>d</printSymbol><value value="1e-1">1 &#215; 10<sup>-1</sup></value></prefix>
+   <prefix Code="c" CODE="C"><name>centi</name><printSymbol>c</printSymbol><value value="1e-2">1 &#215; 10<sup>-2</sup></value></prefix>
+   <prefix Code="m" CODE="M"><name>milli</name><printSymbol>m</printSymbol><value value="1e-3">1 &#215; 10<sup>-3</sup></value></prefix>
+   <prefix Code="u" CODE="U"><name>micro</name><printSymbol>&#956;</printSymbol><value value="1e-6">1 &#215; 10<sup>-6</sup></value></prefix>
+   <base-unit Code="m" CODE="M" dim="L"><name>meter</name><printSymbol>m</printSymbol><property>length</property></base-unit>
+   <base-unit Code="s" CODE="S" dim="T"><name>second</name><printSymbol>s</printSymbol><property>time</property></base-unit>
+   <base-unit Code="g" CODE="G" dim="M"><name>gram</name><printSymbol>g</printSymbol><property>mass</property></base-unit>
+   <base-unit Code="rad" CODE="RAD" dim="A"><name>radian</name><printSymbol>rad</printSymbol><property>plane angle</property></base-unit>
+   <base-unit Code="K" CODE="K" dim="C"><name>kelvin</name><printSymbol>K</printSymbol><property>temperature</property></base-unit>
+   <base-unit Code="C" CODE="C" dim="Q"><name>coulomb</name><printSymbol>C</printSymbol><property>electric charge</property></base-unit>
+   <base-unit Code="cd" CODE="CD" dim="F"><name>candela</name><printSymbol>cd</printSymbol><property>luminous intensity</property></base-unit>
+   <unit Code="10*" CODE="10*" isMetric="no" class="dimless">
+      <name>the number ten for arbitrary powers</name><printSymbol>10</printSymbol><property>number</property>
+      <value Unit="1" UNIT="1" value="10">10</value>
+   </unit>
+   <unit Code="%" CODE="%" isMetric="no" class="dimless">
+      <name>percent</name><printSymbol>%</printSymbol><property>fraction</property>
+      <value Unit="10*-2" UNIT="10*-2" value="1">1</value>
+   </unit>
+   <unit Code="mol" CODE="MOL" isMetric="yes" class="si">
+      <name>mole</name><printSymbol>mol</printSymbol><property>amount of substance</property>
+      <value Unit="10*23" UNIT="10*23" value="6.0221367">6.0221367</value>
+   </unit>
+   <unit Code="h" CODE="HR" isMetric="no" class="iso1000">
+      <name>hour</name><printSymbol>h</printSymbol><property>time</property>
+      <value Unit="s" UNIT="S" value="3600">3600</value>
+   </unit>
+   <unit Code="l" CODE="L" isMetric="yes" class="iso1000">
+      <name>liter</name><printSymbol>l</printSymbol><property>volume</property>
+      <value Unit="dm3" UNIT="DM3" value="1">1</value>
+   </unit>
+   <unit Code="L" CODE="L" isMetric="yes" class="iso1000">
+      <name>liter</name><printSymbol>L</printSymbol><property>volume</property>
+      <value Unit="l" UNIT="L" value="1">1</value>
+   </unit>
+   <unit Code="Cel" CODE="CEL" isMetric="yes" isSpecial="yes" class="si">
+      <name>degree Celsius</name><printSymbol>&#176;C</printSymbol><property>temperature</property>
+      <value Unit="cel(1 K)" UNIT="CEL(1 K)"><function name="Cel" value="1" Unit="K"/></value>
+   </unit>
+   <unit Code="[in_i]" CODE="[IN_I]" isMetric="no" class="intcust">
+      <name>inch</name><printSymbol>in</printSymbol><property>length</property>
+      <value Unit="cm" UNIT="CM" value="254e-2">2.54</value>
+   </unit>
+   <unit Code="[degF]" CODE="[DEGF]" isMetric="no" isSpecial="yes" class="heat">
+      <name>degree Fahrenheit</name><printSymbol>&#176;F</printSymbol><property>temperature</property>
+      <value Unit="degf(5 K/9)" UNIT="DEGF(5 K/9)"><function name="degF" value="5" Unit="K/9"/></value>
+   </unit>
+   <unit Code="[pH]" CODE="[PH]" isMetric="no" isSpecial="yes" class="chemical">
+      <name>pH</name><printSymbol>pH</printSymbol><property>acidity</property>
+      <value Unit="pH(1 mol/l)" UNIT="PH(1 MOL/L)"><function name="pH" value="1" Unit="mol/l"/></value>
+   </unit>
+   <unit Code="B" CODE="B" isMetric="yes" isSpecial="yes" class="levels">
+      <name>bel</name><printSymbol>B</printSymbol><property>level</property>
+      <value Unit="lg(1 1)" UNIT="LG(1 1)"><function name="lg" value="1" Unit="1"/></value>
+   </unit>
+   <unit Code="[iU]" CODE="[IU]" isMetric="yes" isArbitrary="yes" class="chemical">
+      <name>international unit</name><printSymbol>IU</printSymbol><property>arbitrary</property>
+      <value Unit="1" UNIT="1" value="1">1</value>
+   </unit>
+   <unit Code="[IU]" CODE="[IU]" isMetric="yes" isArbitrary="yes" class="chemical">
+      <name>international unit</name><printSymbol>i.U.</printSymbol><property>arbitrary</property>
+      <value Unit="[iU]" UNIT="[IU]" value="1">1</value>
+   </unit>
+   <unit Code="[arb'U]" CODE="[ARB'U]" isMetric="no" isArbitrary="yes" class="chemical">
+      <name>arbitrary unit</name><printSymbol>arb. U</printSymbol><property>arbitrary</property>
+      <value Unit="1" UNIT="1" value="1">1</value>
+   </unit>
+</root>
