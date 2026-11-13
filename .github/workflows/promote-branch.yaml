@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Promote Branch
+
+on:
+  push:
+    branches:
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  security-events: write
+  id-token: write
+  actions: read
+
+jobs:
+  presubmit:
+    name: Presubmit
+    uses: ./.github/workflows/presubmit.yaml
+    permissions:
+      contents: read
+      id-token: write
+      security-events: write
+      actions: read
+    secrets: inherit
+
+  promote:
+    name: Promote to Master
+    needs: presubmit
+    uses: friendly-fhir/.github/.github/workflows/promote-branch.yaml@master
+    with:
+      branch: master
+    secrets: inherit
+    permissions:
+      contents: write
+      id-token: write
