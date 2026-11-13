@@ -29,6 +29,19 @@ func (u *Unit) IsSpecial() bool {
 	return u.canonical.Special != nil
 }
 
+// Coarser reports whether u is a larger unit than other, such as "cm" compared
+// to "mm", so that one u measures more than one other.
+//
+// Coarser reports false if the units are not compatible according to
+// [Engine.Compatible], or if either is a special unit, which has no single
+// magnitude to compare.
+func (u *Unit) Coarser(other *Unit) bool {
+	if u.IsSpecial() || other.IsSpecial() || !u.engine.Compatible(u, other) {
+		return false
+	}
+	return u.canonical.Factor.Cmp(other.canonical.Factor) > 0
+}
+
 // IsArbitrary reports whether the unit involves an arbitrary unit, such as
 // "[iU]", which is only commensurable with units involving the same arbitrary
 // units.
